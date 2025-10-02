@@ -1,284 +1,374 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>G.O.A.T. Gandhi 😝</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protected Access</title>
   <style>
+    :root {
+      --accent1: #8b5cf6;
+      --accent2: #06b6d4;
+      --bg-color: #0f172a;
+      --card-color: #1e293b;
+      --text-color: #ffffff;
+    }
+
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to top right, #fff5cc, #e0ffe0);
-      color: #5c3c92;
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      height: 100vh;
+      margin: 0;
+      transition: background 0.6s ease, color 0.6s ease;
+    }
+
+    .card {
+      background: var(--card-color);
+      border-radius: 20px;
+      padding: 30px;
       text-align: center;
-      overflow-x: hidden;
+      width: 400px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      transition: background 0.6s ease, color 0.6s ease;
     }
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5em;
-      color: #2e8b57;
-      text-shadow: 1px 1px 2px #ccc;
+    h2 {
+      margin-bottom: 16px;
+      font-weight: 700;
     }
 
-    p {
-      font-size: 1.2rem;
-      margin: 0 1em;
-      max-width: 600px;
-      color: #333;
-    }
-
-    .surprise {
-      margin-top: 2em;
-      font-size: 1.5rem;
-      background: #e6e6fa;
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .surprise:hover {
-      background: #d8bfd8;
-      color: #077b8a;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .spotify-embed {
-      margin-top: 2em;
-      width: 90%;
-      max-width: 400px;
-    }
-
-    img {
-      margin-top: 30px;
-      max-width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-
-    .emoji {
-      position: fixed;
-      bottom: -50px;
-      font-size: 2rem;
-      z-index: 9999;
-      pointer-events: none;
-      user-select: none;
-      animation: rise linear infinite;
-    }
-
-    @keyframes rise {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    .cartoon-container {
+    /* Theme toggle button */
+    .theme-toggle {
       position: absolute;
       top: 20px;
-      right: 20px;
-      max-width: 100px;
-    }
-
-    .cartoon-container img {
-      width: 100%;
-      height: auto;
-      animation: floaty 3s ease-in-out infinite;
-    }
-
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>G.O.A.T. Gandhi 😝</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to top right, #fff5cc, #e0ffe0);
-      color: #5c3c92;
+      left: 20px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      text-align: center;
-      overflow-x: hidden;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5em;
-      color: #2e8b57;
-      text-shadow: 1px 1px 2px #ccc;
-    }
-
-    p {
       font-size: 1.2rem;
-      margin: 0 1em;
-      max-width: 600px;
-      color: #333;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      transition: transform 0.4s ease;
+    }
+    .theme-toggle:hover {
+      transform: rotate(20deg) scale(1.1);
     }
 
-    .surprise {
-      margin-top: 2em;
-      font-size: 1.5rem;
-      background: #e6e6fa;
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .surprise:hover {
-      background: #d8bfd8;
-      color: #077b8a;
-    }
-
-    .hidden {
+    /* Password Modal */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(6px);
       display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
     }
 
-    .spotify-embed {
-      margin-top: 2em;
-      width: 90%;
-      max-width: 400px;
+    .modal-content {
+      background: var(--card-color);
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
+      width: 320px;
+      animation: popIn 0.6s ease forwards;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
     }
 
-    img {
-      margin-top: 30px;
-      max-width: 300px;
+    .modal-content h3 {
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .modal-content input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid var(--accent1);
+      width: 80%;
+      outline: none;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      text-align: center;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .modal-content input:focus {
+      border: 2px solid var(--accent2);
+      box-shadow: 0 0 10px var(--accent2);
+    }
+
+    .modal-content button {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .modal-content button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px var(--accent1), 0 0 15px var(--accent2);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.85); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Embossed semi-box after unlock */
+    .embossed-box {
+      background: rgba(15, 23, 42, 0.75);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 
+        inset 2px 2px 6px rgba(255, 255, 255, 0.08),
+        inset -2px -2px 6px rgba(0, 0, 0, 0.4),
+        0 8px 24px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      transform: scale(0.9);
+      opacity: 0;
+      animation: popIn 0.6s ease forwards;
+      margin-top: 20px;
+      transition: background 0.6s ease;
+    }
+
+    .menu-btn, .page2-btn {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border: none;
+      padding: 12px;
+      width: 100%;
       border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      color: white;
+      font-weight: bold;
+      margin: 8px 0;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .menu-btn:hover, .page2-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px var(--accent1), 0 0 15px var(--accent2);
     }
 
-    .emoji {
+    .info-box {
+      display: none;
+      margin-top: 15px;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .info-box a {
+      color: #06b6d4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .info-box a:hover {
+      text-shadow: 0 0 8px #06b6d4;
+    }
+
+    .albab-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #fff;
+      cursor: pointer;
+      text-shadow: 0 0 6px var(--accent2), 0 0 12px var(--accent1);
+      transition: transform 0.2s ease;
+    }
+    .albab-title:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 12px var(--accent2), 0 0 20px var(--accent1);
+    }
+
+    /* Gifts */
+    .gifts-btn {
       position: fixed;
-      bottom: -50px;
-      font-size: 2rem;
-      z-index: 9999;
-      pointer-events: none;
-      user-select: none;
-      animation: rise linear infinite;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      border: none;
+      border-radius: 20px;
+      padding: 12px 18px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease;
+    }
+    .gifts-btn:hover {
+      transform: scale(1.05);
     }
 
-    @keyframes rise {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* Cartoon Styles - All Four Corners */
-    .cartoon {
+    .gifts-panel {
       position: fixed;
-      width: 200px;
-      height: auto;
-      border-radius: 40px;
-      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
-      animation: floaty 4s ease-in-out infinite;
-      z-index: 5;
+      bottom: 70px;
+      right: 20px;
+      width: 280px;
+      background: rgba(15,23,42,0.95);
+      border-radius: 16px;
+      padding: 20px;
+      display: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      animation: popIn 0.4s ease forwards;
+      color: #fff;
+      z-index: 999;
     }
 
-    .top-left {
-      top: 40px;
-      left: 40px;
+    body.light {
+      --bg-color: #f9fafb;
+      --card-color: #ffffff;
+      --text-color: #111827;
     }
-
-    .top-right {
-      top: 40px;
-      right: 40px;
-    }
-
-    .bottom-left {
-      bottom: 40px;
-      left: 40px;
-    }
-
-    .bottom-right {
-      bottom: 40px;
-      right: 40px;
-    }
-
-    @keyframes floaty {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
   </style>
 </head>
 <body>
-  <h1>B'Day G.O.A.T. Gandhi ⛅</h1>
-  <p>
-    Celebrating the legacy of a true icon whose Notes and bullets continue to inspire the world.
-  </p>
+  <button class="theme-toggle" id="themeToggle">🌙</button>
 
-  <div class="surprise" id="surpriseBtn">GODSE🔫</div>
+  <div class="card">
+    <h2>Protected Access</h2>
 
-  <div class="surprise hidden" id="surpriseMsg">
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/3sqRODOZ1Z6hR4F2tnFAlg?utm_source=generator"
-      width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy"></iframe>
+    <div id="protectedContent" style="display:none;">
+      <div class="embossed-box">
+        <div class="albab-title" onclick="handleAlbabClick()">ALBAB QAUM</div>
 
-    <img src="https://pbs.twimg.com/media/GJRiIqwXUAAs3dZ.jpg" alt="OIL UP" />
+        <!-- Page 1 -->
+        <div id="page1" style="display:none;">
+          <button class="menu-btn" onclick="toggleInfo('infoAwaken')">Awaken Info</button>
+          <button class="menu-btn" onclick="toggleInfo('infoCareer')">Career</button>
+          <button class="menu-btn" onclick="toggleInfo('infoID')">ID?</button>
+          <button class="menu-btn" onclick="toggleInfo('infoThanks')">Thanksgiving</button>
+
+          <div class="info-box" id="infoAwaken">
+            <p><strong>Awaken</strong> is a social media expert who derives his name from his beloved Zara.</p>
+          </div>
+          <div class="info-box" id="infoCareer">
+            <p>Awaken has built his career by mastering digital strategies, content creation, and online branding.</p>
+          </div>
+          <div class="info-box" id="infoID">
+            <p><a href="https://instagram.com/awwwken" target="_blank">@awwwken maalom na kaun?</a></p>
+          </div>
+          <div class="info-box" id="infoThanks">
+            <p>Special thanks to all the supporters and community members who made this journey possible.</p>
+          </div>
+        </div>
+
+        <!-- Page 2 -->
+        <div id="page2" style="display:none;">
+          <button class="page2-btn" onclick="toggleInfo2('infoBanning2')">Banning</button>
+          <button class="page2-btn" onclick="toggleInfo2('infoFlirt2')">Flirt</button>
+          <button class="page2-btn" onclick="backToPage1()">⬅ Back</button>
+
+          <div class="info-box" id="infoBanning2">
+            <p><strong>banning krega chotu?</strong></p>
+          </div>
+          <div class="info-box" id="infoFlirt2">
+            <p><strong>eww galat baat</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Cartoon Memes on All 4 Corners -->
-  <img class="cartoon top-left" src="https://humornama.com/wp-content/uploads/2021/10/Gandhiji-Birthday-Meme-on-2nd-October.jpg" alt="Funny Gandhi Meme Top Left" />
-  <img class="cartoon top-right" src="https://media.tenor.com/NHMtnjy7MTYAAAAe/gandhi-gandhiji.png" alt="Funny Gandhi Meme Top Right" />
-  <img class="cartoon bottom-left" src="https://preview.redd.it/drop-your-best-mahatma-gandhi-memes-v0-ki3hu93wgmoe1.png?auto=webp&s=b4fa7f7a2c485d50fc547cdb942b9b257ab36264" alt="Funny Gandhi Meme Bottom Left" />
-  <img class="cartoon bottom-right" src="https://preview.redd.it/drop-your-best-gandhi-meme-quotes-here-v0-3ps76cw8kwoe1.png?width=1080&auto=webp&s=00527a54c3c4551a9652a9711cff47725047c7d7" alt="Funny Gandhi Meme Bottom Right" />
+  <!-- Gifts -->
+  <button class="gifts-btn" id="giftsBtn">🎁 GIFTs</button>
+  <div class="gifts-panel" id="giftsPanel">
+    <h3>Surprise 🎉</h3>
+    <p>This is your special gift area.</p>
+    <p>Follow me on Instagram 👉 <a href="https://instagram.com/awwwken" target="_blank">@awwwken</a></p>
+    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.reddit.com%2Fr%2FJEENEETards%2Fcomments%2F1ln68hf%2Fnetflix_knows_the_memes%2F&psig=AOvVaw1QRp7BerW2O9kVPkROBkyO&ust=1759510097922000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIiP0In8hZADFQAAAAAdAAAAABAJ" alt="Image from link" style="max-width:100%; border-radius:10px; margin-top:10px;">
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="passwordModal">
+    <div class="modal-content">
+      <h3>Enter Password</h3>
+      <input type="password" id="passwordInput" placeholder="🔑 Type the key..." autocomplete="off">
+      <button id="unlockBtn">Unlock</button>
+    </div>
+  </div>
 
   <script>
-    const btn = document.getElementById('surpriseBtn');
-    const msg = document.getElementById('surpriseMsg');
+    const passwordModal = document.getElementById('passwordModal');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const passwordInput = document.getElementById('passwordInput');
+    const protectedContent = document.getElementById('protectedContent');
+    const themeToggle = document.getElementById('themeToggle');
+    const giftsBtn = document.getElementById('giftsBtn');
+    const giftsPanel = document.getElementById('giftsPanel');
+    let albabClickCount = 0;
 
-    btn.addEventListener('click', () => {
-      btn.classList.add('hidden');
-      msg.classList.remove('hidden');
+    // Show modal
+    window.onload = () => { passwordModal.style.display = 'flex'; };
+
+    unlockBtn.addEventListener('click', () => {
+      if (passwordInput.value === "AWAKEN") {
+        passwordModal.style.display = 'none';
+        protectedContent.style.display = 'block';
+      } else {
+        alert("Wrong password!");
+      }
     });
 
-    function createEmoji() {
-      const emoji = document.createElement('div');
-      emoji.classList.add('emoji');
-      emoji.style.left = Math.random() * 100 + 'vw';
-      emoji.style.animationDuration = (2 + Math.random() * 3) + 's';
-      emoji.innerText = '💦';
-      document.body.appendChild(emoji);
-
-      setTimeout(() => {
-        emoji.remove();
-      }, 5000);
+    // Albab QAUM logic
+    function handleAlbabClick() {
+      albabClickCount++;
+      if (albabClickCount === 1) {
+        document.getElementById('page1').style.display = 'block';
+        document.getElementById('page2').style.display = 'none';
+      } else {
+        document.getElementById('page1').style.display = 'none';
+        document.getElementById('page2').style.display = 'block';
+      }
     }
 
-    setInterval(createEmoji, 300);
+    function toggleInfo(id) {
+      document.querySelectorAll('#page1 .info-box').forEach(box => box.style.display = 'none');
+      const target = document.getElementById(id);
+      if (target) target.style.display = 'block';
+    }
+
+    function toggleInfo2(id) {
+      document.querySelectorAll('#page2 .info-box').forEach(box => box.style.display = 'none');
+      const target = document.getElementById(id);
+      if (target) target.style.display = 'block';
+    }
+
+    function backToPage1() {
+      document.getElementById('page2').style.display = 'none';
+      document.getElementById('page1').style.display = 'block';
+    }
+
+    // Theme Toggle
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      themeToggle.textContent = document.body.classList.contains('light') ? "☀️" : "🌙";
+    });
+
+    // Gifts panel
+    giftsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      giftsPanel.style.display = giftsPanel.style.display === "block" ? "none" : "block";
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!giftsPanel.contains(e.target) && e.target !== giftsBtn) {
+        giftsPanel.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
