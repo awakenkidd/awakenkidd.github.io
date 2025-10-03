@@ -228,6 +228,46 @@
       z-index: 999;
     }
 
+    /* Left bottom panel */
+    .left-panel {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(15,23,42,0.95);
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 999;
+    }
+
+    .left-panel button {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .left-panel button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 10px var(--accent1), 0 0 15px var(--accent2);
+    }
+
+    .help-message {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 0 6px var(--accent2);
+    }
+
     body.light {
       --bg-color: #f9fafb;
       --card-color: #ffffff;
@@ -289,7 +329,13 @@
     <h3>Surprise 🎉</h3>
     <p>This is your special gift area.</p>
     <p>Follow me on Instagram 👉 <a href="https://instagram.com/awwwken" target="_blank">@awwwken</a></p>
-    <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.reddit.com%2Fr%2FJEENEETards%2Fcomments%2F1ln68hf%2Fnetflix_knows_the_memes%2F&psig=AOvVaw1QRp7BerW2O9kVPkROBkyO&ust=1759510097922000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIiP0In8hZADFQAAAAAdAAAAABAJ" alt="Image from link" style="max-width:100%; border-radius:10px; margin-top:10px;">
+  </div>
+
+  <!-- Left Panel -->
+  <div class="left-panel">
+    <button id="helpBtn">HELP</button>
+    <button id="exitBtn">EXIT</button>
+    <div class="help-message" id="helpMessage">NO HELP MY SON</div>
   </div>
 
   <!-- Modal -->
@@ -309,6 +355,9 @@
     const themeToggle = document.getElementById('themeToggle');
     const giftsBtn = document.getElementById('giftsBtn');
     const giftsPanel = document.getElementById('giftsPanel');
+    const helpBtn = document.getElementById('helpBtn');
+    const exitBtn = document.getElementById('exitBtn');
+    const helpMessage = document.getElementById('helpMessage');
     let albabClickCount = 0;
 
     // Show modal
@@ -368,6 +417,16 @@
       if (!giftsPanel.contains(e.target) && e.target !== giftsBtn) {
         giftsPanel.style.display = "none";
       }
+    });
+
+    // Help button
+    helpBtn.addEventListener('click', () => {
+      helpMessage.style.display = helpMessage.style.display === "block" ? "none" : "block";
+    });
+
+    // Exit button
+    exitBtn.addEventListener('click', () => {
+      window.location.href = "https://instagram.com/awwwken";
     });
   </script>
 </body>
